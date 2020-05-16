@@ -12,8 +12,10 @@ passport.use(
       clientSecret: keys.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
     },
-    (accessToken) => {
-      console.log(accessToken);
+    (accessToken, refreshToken, profile, done) => {
+      console.log("access:", accessToken);
+      console.log("refresh:", refreshToken);
+      console.log("profile:", profile);
     }
   )
 );
