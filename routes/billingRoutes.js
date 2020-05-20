@@ -2,6 +2,10 @@ const keys = require("../config/keys");
 const stripe = require("stripe")(keys.STRIPE_SECRET_KEY);
 
 module.exports = (app) => {
+  if (!req.user) {
+    return res.status(401).send({ error: "You must log in!" });
+  }
+
   app.post("/api/stripe", async (req, res) => {
     const charge = await stripe.charges.create({
       amount: 500,
